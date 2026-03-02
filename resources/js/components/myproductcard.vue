@@ -21,7 +21,7 @@ function openModal() {
     <div class="product-info">
       <span class="product-category">{{ product.category }}</span>
       <h3 class="product-name" @click="openModal">{{ product.name }}</h3>
-      <span class="product-price">${{ product.price.toFixed(2) }}</span>
+      <span class="product-price">FCFA {{ product.price.toFixed(2) }}</span>
 
       <button class="add-to-cart" @click="add(product)">
         Add to Cart

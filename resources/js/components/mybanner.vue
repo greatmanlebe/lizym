@@ -1,11 +1,11 @@
 <template>
   <section class="hero">
     <div class="container">
-      <h2>Welcome to ShopHub</h2>
+      <h2>Welcome to Lizym</h2>
       <p>Discover amazing products at unbeatable prices</p>
 
       <div class="hero-buttons">
-        <Link href="/shop" class="btn btn-primary">Shop Now</Link>
+        <Link href="/seller/register" class="btn btn-primary">Sell</Link>
         <button class="btn btn-outline">Learn More</button>
       </div>
     </div>
