@@ -1,0 +1,22 @@
+{
+  "app": {
+    "welcome": "Welcome",
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "add_to_cart": "Add to cart",
+    "checkout": "Checkout",
+    "your_conversations": "Your conversations",
+    "send_message": "Send message",
+    "seller_dashboard": "Seller dashboard",
+    "products": "Products",
+    "price": "Price",
+    "description": "Description",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "shop": "Shop",
+    "about": "About",
+    "home": "Home"
+  }
+}

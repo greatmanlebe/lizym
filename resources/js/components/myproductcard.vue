@@ -24,7 +24,7 @@ function openModal() {
       <span class="product-price">FCFA {{ product.price.toFixed(2) }}</span>
 
       <button class="add-to-cart" @click="add(product)">
-        Add to Cart
+       {{ $t('app.add_to_cart') }}
       </button>
     </div>
   </div>

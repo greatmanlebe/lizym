@@ -1,0 +1,22 @@
+{
+  "app": {
+    "welcome": "Bienvenue dans notre boutique",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "register": "S'inscrire",
+    "add_to_cart": "Ajouter au panier",
+    "checkout": "Passer à la caisse",
+    "your_conversations": "Vos conversations",
+    "send_message": "Envoyer un message",
+    "seller_dashboard": "Tableau de bord vendeur",
+    "products": "Produits",
+    "price": "Prix",
+    "description": "Description",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "save": "Enregistrer",
+    "about": "Apropos",
+    "shop": "Boutique",
+    "home": "Acceuil"
+  }
+}
