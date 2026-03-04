@@ -1,24 +1,45 @@
 <script setup lang="ts">
 import { useCart } from '../composables/usercart'
-import { router } from '@inertiajs/vue3'
+import { useForm } from '@inertiajs/vue3'
 
 defineProps<{ open: boolean }>()
 defineEmits(['close'])
 
-const { cart, update, remove } = useCart()
+const { cart, update, remove, clear } = useCart()
+
+const form = useForm({
+  grouped_cart: {}
+})
 
 function startChat() {
   if (!cart.value.length) return
 
-  // Extract seller_id from the FIRST item (all items from same seller)
-  const sellerId = cart.value[0].product.seller_id
+  const grouped: Record<number, any[]> = {}
 
-  router.post('/checkout/start-chat', {
-    seller_id: sellerId,
+  cart.value.forEach(item => {
+    const sellerId = item.product.seller_id
+
+    if (!grouped[sellerId]) grouped[sellerId] = []
+
+    grouped[sellerId].push({
+      id: item.product.id,
+      name: item.product.name,
+      quantity: item.quantity,
+      price: item.product.price,
+      seller_id: sellerId
+    })
+  })
+
+  form.grouped_cart = grouped
+
+  form.post('/checkout/start-chat', {
+    onSuccess: () => {
+      clear()          // 🟩 Empty the cart
+      emit('close')    // 🟩 Close the sidebar
+    }
   })
 }
 </script>
-
 
 <template>
   <div class="cart-sidebar" :class="{ active: open }">

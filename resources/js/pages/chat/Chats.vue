@@ -1,23 +1,153 @@
 <script setup>
 import { Link } from '@inertiajs/vue3'
-
+  import AppLayout from '@/layouts/main.vue'
 const props = defineProps({
   conversations: Array,
 })
 </script>
 
 <template>
-  <div>
-    <h2>Your Conversations</h2>
+<AppLayout>
+  <div class="inbox-container">
 
-    <div v-if="!conversations.length">
+    <h2 class="inbox-title">Your Conversations</h2>
+
+    <!-- No conversations -->
+    <div v-if="!conversations || conversations.length === 0" class="inbox-empty">
       No conversations yet.
     </div>
 
-    <div v-for="c in conversations" :key="c.id">
-      <Link :href="`/chat/${c.id}`">
-        Chat with {{ c.seller.name }}
+    <!-- Conversation list -->
+    <div
+      v-for="c in conversations"
+      :key="c.id"
+      class="inbox-item"
+    >
+      <Link :href="`/chat/${c.id}`" class="inbox-link">
+
+        <!-- Avatar -->
+        <div class="inbox-avatar">
+          {{ c.seller?.name?.charAt(0)?.toUpperCase() ?? '?' }}
+        </div>
+
+        <!-- Text -->
+        <div class="inbox-text">
+          <div class="inbox-name">
+            {{ c.seller?.name ?? 'Unknown seller' }}
+          </div>
+
+          <div class="inbox-preview">
+            {{ c.last_message?.message ?? 'No messages yet' }}
+          </div>
+        </div>
+
+        <!-- Timestamp -->
+        <div class="inbox-time">
+          {{ new Date(c.updated_at).toLocaleDateString() }}
+        </div>
+
       </Link>
     </div>
+
   </div>
+  </AppLayout>
 </template>
+
+<style>
+/* Container */
+.inbox-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #e2e2e2;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Title */
+.inbox-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* Empty state */
+.inbox-empty {
+  padding: 30px;
+  text-align: center;
+  color: #777;
+  border-radius: 8px;
+  background: #f7f7f7;
+  border: 1px solid #e5e5e5;
+}
+
+/* Conversation item wrapper */
+.inbox-item {
+  margin-bottom: 10px;
+}
+
+/* Clickable conversation card */
+.inbox-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 14px;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 10px;
+  border: 1px solid #e2e2e2;
+  background: #ffffff;
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
+}
+
+.inbox-link:hover {
+  background: #f5f5f5;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transform: translateY(-1px);
+}
+
+/* Avatar */
+.inbox-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #16a34a; /* green */
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  margin-right: 14px;
+}
+
+/* Text block */
+.inbox-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.inbox-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.inbox-preview {
+  font-size: 13px;
+  color: #666666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Timestamp */
+.inbox-time {
+  font-size: 11px;
+  color: #999999;
+  margin-left: 10px;
+  white-space: nowrap;
+}
+</style>

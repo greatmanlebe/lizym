@@ -23,9 +23,7 @@ const seller = computed(() => page.props.auth?.seller ?? null)
         <nav class="desktop-nav">
           <Link href="/home">Home</Link>
           <Link href="/">Shop</Link>
-          <Link href="/categories">Categories</Link>
           <Link href="/about">About</Link>
-          <Link href="/contact">Contact</Link>
         </nav>
 
         <div class="header-actions">
@@ -68,18 +66,19 @@ const seller = computed(() => page.props.auth?.seller ?? null)
       <div class="mobile-menu" :class="{ active: mobileMenu }">
         <Link href="/home">Home</Link>
         <Link href="/">Shop</Link>
-        <Link href="/categories">Categories</Link>
         <Link href="/about">About</Link>
-        <Link href="/contact">Contact</Link>
+
 
         <!-- Buyer -->
         <div v-if="buyer" style="font-weight:600; margin-left:1rem;">
-          <p>Welcome {{ buyer.name }} (ID: {{ buyer.id }})</p>
+          <p>Welcome {{ buyer.name }}</p>
+                  <!--  <p>(ID: {{ buyer.id }})</p>-->
         </div>
 
         <!-- Seller -->
         <div v-if="seller" style="font-weight:600; margin-left:1rem;">
-          <p>Welcome {{ seller.name }} (ID: {{ seller.id }})</p>
+          <p>Welcome {{ seller.name }}</p>
+                  <!--  <p>(ID: {{ seller.id }})</p>-->
         </div>
       </div>
     </div>

@@ -7,21 +7,42 @@ use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
-    public function startChat(Request $request)
-    {
-        $request->validate([
-            'seller_id' => 'required|exists:sellers,id',
-        ]);
+public function startChat(Request $request)
+{
+    $buyer = auth('web')->user();
+    $grouped = $request->grouped_cart;
 
-        $buyer = auth('web')->user();
+    $conversationIds = [];
+
+    foreach ($grouped as $sellerId => $items) {
 
         $conversation = Conversation::firstOrCreate([
             'buyer_id'  => $buyer->id,
-            'seller_id' => $request->seller_id,
+            'seller_id' => $sellerId,
         ]);
 
-        return redirect()->route('chat.show', $conversation);
+        $conversationIds[] = $conversation->id;
+
+        // Build message text
+        $text = "New order request from {$buyer->name} ({$buyer->email})\n\n";
+        $text .= "Products:\n";
+
+        foreach ($items as $item) {
+            $text .= "- {$item['name']} x{$item['quantity']} (FCFA {$item['price']})\n";
+        }
+
+        // Create first message
+        Message::create([
+            'conversation_id' => $conversation->id,
+            'sender_id'       => $buyer->id,
+            'sender_type'     => 'buyer',
+            'message'         => $text,
+        ]);
     }
+
+    // Redirect buyer to chat list
+    return redirect('/chat/chats');
+}
 
     public function show(Conversation $conversation)
     {

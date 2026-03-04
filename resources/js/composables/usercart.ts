@@ -37,5 +37,10 @@ export function useCart() {
     cart.value.reduce((sum, item) => sum + item.quantity, 0)
   )
 
-  return { cart, load, add, remove, update, count }
+  function clear() {
+    cart.value = []
+    localStorage.removeItem('cart')
+  }
+
+  return { cart, load, add, remove, update, count, clear }
 }

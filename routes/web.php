@@ -42,7 +42,8 @@ Route::get('/register', [RegisterController::class, 'show']);
 Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('/login', [LoginController::class, 'show']);
-Route::post('/login', [LoginController::class, 'login']);
+Route::get('/login', [LoginController::class, 'show'])->name('login');
+
 
 
 /*
@@ -148,10 +149,19 @@ Route::post('/checkout/start-chat', [ChatController::class, 'startChat'])
 Route::middleware('auth:web')->get('/chat/chats', function () {
     $buyer = auth('web')->user();
 
-    $conversations = Conversation::with('seller')
-        ->where('buyer_id', $buyer->id)
-        ->orderBy('updated_at', 'desc')
-        ->get();
+    $conversations = Conversation::with([
+        'seller',
+        'messages' => function ($q) {
+            $q->latest()->limit(1);
+        }
+    ])
+    ->where('buyer_id', $buyer->id)
+    ->orderBy('updated_at', 'desc')
+    ->get()
+    ->map(function ($c) {
+        $c->last_message = $c->messages->first();
+        return $c;
+    });
 
     return inertia('chat/Chats', [
         'conversations' => $conversations,
