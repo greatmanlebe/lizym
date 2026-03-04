@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -14,18 +15,24 @@ class LoginController extends Controller
     
     public function login(Request $request)
     {
-        // Validate input
         $request->validate([
             'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        // Try to log in using email + password
-        if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect('/shop');
+        // Auto-logout seller if logged in
+        if (auth('seller')->check()) {
+            auth('seller')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
         }
 
-        // If login fails
+        // Attempt buyer login
+        if (Auth::guard('web')->attempt($request->only('email', 'password'))) {
+            $request->session()->regenerate();
+            return redirect('/home');
+        }
+
         return back()->withErrors([
             'email' => 'Invalid email or password.',
         ]);

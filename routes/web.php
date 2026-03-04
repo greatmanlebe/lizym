@@ -3,9 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
-
+use App\Models\Conversation;
+use App\Http\Controllers\Seller\SellerInboxController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ChatController;
+
 
 use App\Http\Controllers\Auth\SellerregisterController;
 use App\Http\Controllers\Auth\SellerloginController;
@@ -135,3 +138,46 @@ Route::prefix('seller')->group(function () {
         'products' => $products,
     ]);
 });
+
+/// Buyer starts chat from checkout
+Route::post('/checkout/start-chat', [ChatController::class, 'startChat'])
+    ->middleware('auth:web')
+    ->name('checkout.start-chat');
+
+// Buyer chat list
+Route::middleware('auth:web')->get('/chat/chats', function () {
+    $buyer = auth('web')->user();
+
+    $conversations = Conversation::with('seller')
+        ->where('buyer_id', $buyer->id)
+        ->orderBy('updated_at', 'desc')
+        ->get();
+
+    return inertia('chat/Chats', [
+        'conversations' => $conversations,
+    ]);
+})->name('chat.chats');
+
+// Shared conversation view + send
+Route::get('/chat/{conversation}', [ChatController::class, 'show'])
+    ->name('chat.show');
+
+Route::post('/chat/{conversation}/message', [ChatController::class, 'send'])
+    ->name('chat.send');
+
+// Seller inbox
+Route::middleware('auth:seller')->get('/seller/inbox', [SellerInboxController::class, 'index'])
+    ->name('seller.inbox');
+
+// Universal chat button
+Route::get('/my-chats', function () {
+    if (auth('seller')->check()) {
+        return redirect()->route('seller.inbox');
+    }
+
+    if (auth('web')->check()) {
+        return redirect()->route('chat.chats');
+    }
+
+    return redirect('/login');
+})->name('my-chats');

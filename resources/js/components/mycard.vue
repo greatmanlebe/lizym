@@ -1,11 +1,24 @@
 <script setup lang="ts">
 import { useCart } from '../composables/usercart'
+import { router } from '@inertiajs/vue3'
 
 defineProps<{ open: boolean }>()
 defineEmits(['close'])
 
 const { cart, update, remove } = useCart()
+
+function startChat() {
+  if (!cart.value.length) return
+
+  // Extract seller_id from the FIRST item (all items from same seller)
+  const sellerId = cart.value[0].product.seller_id
+
+  router.post('/checkout/start-chat', {
+    seller_id: sellerId,
+  })
+}
 </script>
+
 
 <template>
   <div class="cart-sidebar" :class="{ active: open }">
@@ -40,7 +53,7 @@ const { cart, update, remove } = useCart()
         </span>
       </div>
 
-      <button class="btn btn-primary checkout-btn">Checkout</button>
+      <button class="btn btn-primary checkout-btn" @click="startChat">Checkout</button>
     </div>
   </div>
 </template>

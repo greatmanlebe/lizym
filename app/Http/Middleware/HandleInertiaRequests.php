@@ -11,9 +11,10 @@ public function share(Request $request): array
 {
     return array_merge(parent::share($request), [
         'auth' => [
-            'buyer' => auth()->check() ? auth()->user() : null,
+            'buyer' => auth('web')->check() ? auth('web')->user() : null,
             'seller' => auth('seller')->check() ? auth('seller')->user() : null,
         ],
+
         'csrf_token' => csrf_token(),
         'message' => session('message'),
 

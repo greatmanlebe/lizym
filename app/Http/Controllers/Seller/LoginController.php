@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
@@ -14,7 +15,21 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        // Auto-logout buyer if logged in
+        if (auth('web')->check()) {
+            auth('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+        }
+
+        // Attempt seller login
         if (Auth::guard('seller')->attempt($request->only('email', 'password'))) {
+            $request->session()->regenerate();
             return redirect('/seller/dashboard');
         }
 
