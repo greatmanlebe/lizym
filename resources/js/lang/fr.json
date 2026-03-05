@@ -1,10 +1,23 @@
 {
   "app": {
     "welcome": "Bienvenue dans notre boutique",
+            "wel": "Bienvenue, ",
     "login": "Connexion",
+         "Your Products":"Vos produits", 
+    "slogin": "Connexion a Votre Compte partenaire",
+    "You have no products yet":"Vous n'avez encore aucun produit.",
     "logout": "Déconnexion",
+    "View My Shop":"Voir ma boutique",
+        "+ Add Product":"+ Ajouter un produit",
+    "password": "Mot de passe",
+    "sign up":"S'inscrire",
+    "location":"Localisation",
+    "tel":"Numero de Telephone",
+    "already have an account":"Vous avez déjà un compte ?",
+    "Dont have an account":"Vous n'avez pas de compte ?",
     "register": "S'inscrire",
     "add_to_cart": "Ajouter au panier",
+    "cart": "panier",
     "checkout": "Passer à la caisse",
     "your_conversations": "Vos conversations",
     "send_message": "Envoyer un message",
@@ -17,6 +30,49 @@
     "save": "Enregistrer",
     "about": "Apropos",
     "shop": "Boutique",
+        "name": "Nom complet",
+    "slug": "Nom de la Boutique",     
+    "create": "Cree un compte partenaire",
+    "Welcome to Lizym": "Bienvenue chez Lizym",
+    "learn more": "En savoir plus",
+    "Become a partner":"Devenez partenaire",
+        "text": "Découvrez des produits exceptionnels à des prix imbattables",
     "home": "Acceuil"
+  },
+"validation": {
+    "email_taken": "Cet email est déjà utilisé.",
+    "slug_taken": "Ce nom de boutique est déjà pris.",
+        "log_taken": "L'adresse e-mail ou le mot de passe sont incorrects.",
+    "pass_taken": "Le mot de passe doit comporter plus de 6 caractères."
   }
+  ,
+  
+  "product": {
+    "add_title": "Ajouter un nouveau produit",
+    "name": "Nom du produit",
+    "name_placeholder": "Entrez le nom du produit",
+    "price": "Prix",
+    "price_placeholder": "0.00",
+    "image": "URL de l'image",
+    "image_placeholder": "https://exemple.com/image.jpg",
+    "category": "Catégorie",
+    "category_placeholder": "Sélectionnez une catégorie",
+    "description": "Description",
+    "description_placeholder": "Décrivez votre produit",
+    "save": "Enregistrer le produit"
+  },
+  "categories": {
+    "electronics": "Électronique",
+    "fashion": "Mode",
+    "sports": "Sport",
+    "home": "Maison",
+    "accessories": "Accessoires"
+  },
+    "inbox": {
+    "title": "Messages des acheteurs",
+    "empty": "Aucune conversation pour le moment."
+  }
+
+
 }
+

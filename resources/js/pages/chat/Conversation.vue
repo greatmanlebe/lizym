@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, nextTick, watch } from 'vue'
 import { router, usePage } from '@inertiajs/vue3'
-
+import AppLayout from '@/layouts/main.vue'
 const props = defineProps({
   conversation: Object,
   messages: Array,
@@ -51,6 +51,7 @@ watch(() => props.messages.length, () => {
 </script>
 
 <template>
+  <AppLayout>
   <div class="chat-container">
 
     <!-- Header -->
@@ -86,6 +87,7 @@ watch(() => props.messages.length, () => {
     </form>
 
   </div>
+  </AppLayout>
 </template>
 
 <style>

@@ -16,6 +16,10 @@ function openModal() {
   <div class="product-card">
     <div class="product-image" @click="openModal">
       <img :src="product.image" :alt="product.name" />
+                 <img :src="`/img/${product.image}`"             
+                   alt="Product Image" 
+                   style="width: 400px;"
+              class="product-image" />
     </div>
 
     <div class="product-info">

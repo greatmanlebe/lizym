@@ -5,6 +5,7 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\Conversation;
 use App\Models\Product;
+use App\Models\Seller;
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
@@ -130,19 +131,31 @@ Route::middleware([\App\Http\Middleware\SetLocale::class])->group(function () {
             // Add product page
             Route::get('/products/create', fn() => inertia('seller/Addproducts'));
 
-            // Store product
             Route::post('/products', function (Request $request) {
+                $request->validate([
+                    'name' => 'required',
+                    'price' => 'required|numeric',
+                    'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+                    'category' => 'required',
+                    'description' => 'required',
+                ]);
+
+                // Save image to public/img
+                $imageName = time() . '.' . $request->image->extension();
+                $request->image->move(public_path('img'), $imageName);
+
                 Product::create([
                     'seller_id' => auth('seller')->id(),
                     'name' => $request->name,
                     'price' => $request->price,
-                    'image' => $request->image,
+                    'image' => $imageName, // store only the filename
                     'category' => $request->category,
                     'description' => $request->description,
                 ]);
 
                 return redirect('/seller/dashboard')->with('message', 'Product added successfully!');
             });
+
 
             // Delete product
             Route::delete('/products/{id}', function ($id) {
@@ -171,12 +184,11 @@ Route::middleware([\App\Http\Middleware\SetLocale::class])->group(function () {
     | EACH SELLER PAGE
     |--------------------------------------------------------------------------
     */
-    Route::get('/shop/{seller}', function ($sellerId) {
-        $seller = \App\Models\Seller::findOrFail($sellerId);
+    Route::get('/shop/{seller}', function (Seller $seller) {
 
         return inertia('shop/Sellershop', [
             'seller' => $seller,
-            'products' => Product::where('seller_id', $sellerId)->get(),
+            'products' => Product::where('seller_id', $seller->id)->get(),
         ]);
     });
 

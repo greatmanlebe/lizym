@@ -20,12 +20,12 @@ function submit() {
 <template>
   <AppLayout>
     <div class="container" style="max-width: 450px; padding: 2rem 1rem;">
-      <h2 style="font-size: 2rem; margin-bottom: 1rem; text-align:center;">Create Account</h2>
+      <h2 style="font-size: 2rem; margin-bottom: 1rem; text-align:center;">{{ $t('app.sign up') }}</h2>
 
       <form @submit.prevent="submit" style="display: grid; gap: 1.2rem;">
         
         <div>
-          <label style="font-weight: 600;">Full Name</label>
+          <label style="font-weight: 600;">{{ $t('app.name') }}</label>
           <input
             v-model="form.name"
             type="text"
@@ -44,10 +44,11 @@ function submit() {
             class="input"
             style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 0.5rem;"
           />
+          <div v-if="form.errors.email" class="error">{{ $t('validation.email_taken') }}</div>
         </div>
 
         <div>
-          <label style="font-weight: 600;">Password</label>
+          <label style="font-weight: 600;">{{ $t('app.password') }}</label>
           <input
             v-model="form.password"
             type="password"
@@ -55,10 +56,11 @@ function submit() {
             class="input"
             style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 0.5rem;"
           />
+                    <div v-if="form.errors.email" class="error">{{ $t('validation.pass_taken') }}</div>
         </div>
 
         <div>
-          <label style="font-weight: 600;">location</label>
+          <label style="font-weight: 600;">{{ $t('app.location') }}</label>
           <input
             v-model="form.location"
             type="text"
@@ -68,7 +70,7 @@ function submit() {
           />
         </div>
         <div>
-          <label style="font-weight: 600;">Tel Number</label>
+          <label style="font-weight: 600;">{{ $t('app.tel') }}</label>
           <input
             v-model="form.number"
             type="interger"
@@ -78,14 +80,22 @@ function submit() {
           />
         </div>
         <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.9rem;">
-          Create Account
+          {{ $t('app.register') }}
         </button>
 
         <p style="text-align:center; margin-top: 0.5rem;">
-          Already have an account?
-          <a href="/login" style="color: #2563eb; font-weight: 600;">Login</a>
+          {{ $t('app.already have an account') }}
+          <a href="/login" style="color: #2563eb; font-weight: 600;">{{ $t('app.login') }}</a>
         </p>
       </form>
     </div>
   </AppLayout>
 </template>
+<style>
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+}
+</style>
+

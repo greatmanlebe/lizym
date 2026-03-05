@@ -44,7 +44,7 @@ function startChat() {
 <template>
   <div class="cart-sidebar" :class="{ active: open }">
     <div class="cart-header">
-      <h3>Shopping Cart</h3>
+      <h3>{{ $t('app.cart') }}</h3>
       <button class="close-cart" @click="$emit('close')">×</button>
     </div>
 
@@ -74,7 +74,7 @@ function startChat() {
         </span>
       </div>
 
-      <button class="btn btn-primary checkout-btn" @click="startChat">Checkout</button>
+      <button class="btn btn-primary checkout-btn" @click="startChat">{{ $t('app.checkout') }}</button>
     </div>
   </div>
 </template>

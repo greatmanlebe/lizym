@@ -16,7 +16,7 @@ function submit() {
 <template>
   <AppLayout>
     <div class="container" style="max-width: 450px; padding: 2rem 1rem;">
-      <h2 style="font-size: 2rem; margin-bottom: 1rem; text-align:center;">Login</h2>
+      <h2 style="font-size: 2rem; margin-bottom: 1rem; text-align:center;"> {{ $t('app.login') }}</h2>
 
       <form @submit.prevent="submit" style="display: grid; gap: 1.2rem;">
 
@@ -32,7 +32,7 @@ function submit() {
         </div>
 
         <div>
-          <label style="font-weight: 600;">Password</label>
+          <label style="font-weight: 600;">{{ $t('app.password') }}</label>
           <input
             v-model="form.password"
             type="password"
@@ -41,21 +41,20 @@ function submit() {
             style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 0.5rem;"
           />
         </div>
-
+    <p v-if="form.errors.email" style="color:red; margin-top:10px;">
+      {{ $t('validation.log_taken') }}
+    </p>
         <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.9rem;">
-          Login
+          {{ $t('app.login') }}
         </button>
 
         <p style="text-align:center; margin-top: 0.5rem;">
-          Don't have an account?
-          <a href="/register" style="color: #2563eb; font-weight: 600;">Sign up</a>
+          {{ $t('app.Dont have an account') }}
+          <a href="/register" style="color: #2563eb; font-weight: 600;">{{ $t('app.sign up') }}</a>
         </p>
       </form>
 
-          <!-- ERROR MESSAGE -->
-    <p v-if="form.errors.email" style="color:red; margin-top:10px;">
-      {{ form.errors.email }}
-    </p>
+
 
     </div>
   </AppLayout>

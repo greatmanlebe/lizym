@@ -12,69 +12,74 @@ const categories = [
 const form = useForm({
   name: '',
   price: '',
-  image: '',
+  image: null,
   category: '',
   description: '',
 })
-
+function handleImageUpload(e) {
+  form.image = e.target.files[0]
+}
 function submit() {
-  form.post('/seller/products')
+form.post('/seller/products', {
+  forceFormData: true
+})
+
 }
 </script>
 
 <template>
-    <AppLayout>
- <main class="main-container">
+  <AppLayout>
+    <main class="main-container">
 
-    <section class="form-section">
-      <h1 class="section-title">Add New Product</h1>
+      <section class="form-section">
+        <h1 class="section-title">{{ $t('product.add_title') }}</h1>
 
-      <form @submit.prevent="submit" class="product-form">
+        <form @submit.prevent="submit" class="product-form">
 
-        <!-- Product Name -->
-        <div class="form-group">
-          <label class="form-label">Product Name</label>
-          <input v-model="form.name" class="input-field" placeholder="Enter product name" />
-        </div>
+          <!-- Product Name -->
+          <div class="form-group">
+            <label class="form-label">{{ $t('product.name') }}</label>
+            <input v-model="form.name" class="input-field" :placeholder="$t('product.name_placeholder')" />
+          </div>
 
-        <!-- Price -->
-        <div class="form-group">
-          <label class="form-label">Price</label>
-          <input v-model="form.price" class="input-field" type="number" placeholder="0.00" />
-        </div>
+          <!-- Price -->
+          <div class="form-group">
+            <label class="form-label">{{ $t('product.price') }}</label>
+            <input v-model="form.price" class="input-field" type="number" :placeholder="$t('product.price_placeholder')" />
+          </div>
 
-        <!-- Image URL -->
-        <div class="form-group">
-          <label class="form-label">Image URL</label>
-          <input v-model="form.image" class="input-field" placeholder="https://example.com/image.jpg" />
-        </div>
+          <!-- Image URL -->
+          <div class="form-group">
+            <label class="form-label">{{ $t('product.image') }}</label>
+             <input type="file" @change="handleImageUpload" class="input-field" />
+            
+          </div>
 
-        <!-- Category -->
-        <div class="form-group">
-          <label class="form-label">Category</label>
-          <select v-model="form.category" class="input-field">
-            <option disabled value="">Select category</option>
-            <option v-for="cat in categories" :key="cat" :value="cat">
-              {{ cat }}
-            </option>
-          </select>
-        </div>
+          <!-- Category -->
+          <div class="form-group">
+            <label class="form-label">{{ $t('product.category') }}</label>
+            <select v-model="form.category" class="input-field">
+              <option disabled value="">{{ $t('product.category_placeholder') }}</option>
+              <option v-for="cat in categories" :key="cat" :value="cat">
+                {{ $t(`categories.${cat}`) }}
+              </option>
+            </select>
+          </div>
 
-        <!-- Description -->
-        <div class="form-group">
-          <label class="form-label">Description</label>
-          <textarea v-model="form.description" class="textarea-field" placeholder="Describe your product"></textarea>
-        </div>
+          <!-- Description -->
+          <div class="form-group">
+            <label class="form-label">{{ $t('product.description') }}</label>
+            <textarea v-model="form.description" class="textarea-field" :placeholder="$t('product.description_placeholder')"></textarea>
+          </div>
 
-        <!-- Submit -->
-        <button type="submit" class="btn-primary">Save Product</button>
+          <!-- Submit -->
+          <button type="submit" class="btn-primary">{{ $t('product.save') }}</button>
 
-      </form>
-    </section>
+        </form>
+      </section>
 
-  </main>
+    </main>
   </AppLayout>
- 
 </template>
 
 <style scoped>

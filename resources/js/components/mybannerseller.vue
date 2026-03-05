@@ -1,8 +1,8 @@
 <template>
   <section class="hero">
     <div class="container">
-      <h2>Welcome to Lizym</h2>
-      <p>{{ seller.name }}'s Shop</p>
+      <h2>{{ $t('app.Welcome to Lizym') }}</h2>
+      <p>{{ seller.slug }} {{ $t('app.shop') }}</p>
 
     </div>
   </section>

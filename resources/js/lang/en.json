@@ -1,10 +1,23 @@
 {
   "app": {
     "welcome": "Welcome",
+        "wel": "Welcome",
+     "Your Products":"Your Products", 
     "login": "Login",
+    "You have no products yet":"You have no products yet.",
+    "slogin": "Seller Login",
+    "View My Shop":"View My Shop",
     "logout": "Logout",
+    "+ Add Product":"+ Add Product",
+    "password": "Password",
+    "sign up": "Sign up",
+    "location":"location",
+    "tel":"Telephone Number",
+    "already have an account":"Already have an account?",
+    "Dont have an account":"Don't have an account?",
     "register": "Register",
     "add_to_cart": "Add to cart",
+        "cart": "cart",
     "checkout": "Checkout",
     "your_conversations": "Your conversations",
     "send_message": "Send message",
@@ -17,6 +30,51 @@
     "save": "Save",
     "shop": "Shop",
     "about": "About",
-    "home": "Home"
+    "home": "Home",
+    "home": "Home",
+    "name": "Full name",
+    "slug": "Shop name",    
+    "create": "Create A Seller Account",
+    "learn more": "Learn more",
+    "Become a partner":"Become a partner",
+    "text": "Discover amazing products at unbeatable prices",
+    "Welcome to Lizym": "Welcome to Lizym"  
+  },
+"validation": {
+    "email_taken": "This email is already registered.",
+    "slug_taken": "This shop name is already taken.",
+    "log_taken": "The Email or password are incorrect.",
+    "pass_taken": "Password most have more than 6 character."
+
+  },
+  
+  "product": {
+    "add_title": "Add New Product",
+    "name": "Product Name",
+    "name_placeholder": "Enter product name",
+    "price": "Price",
+    "price_placeholder": "0.00",
+    "image": "Image URL",
+    "image_placeholder": "https://example.com/image.jpg",
+    "category": "Category",
+    "category_placeholder": "Select category",
+    "description": "Description",
+    "description_placeholder": "Describe your product",
+    "save": "Save Product"
+  },
+  "categories": {
+    "electronics": "Electronics",
+    "fashion": "Fashion",
+    "sports": "Sports",
+    "home": "Home",
+    "accessories": "Accessories"
+  },
+    "inbox": {
+    "title": "Buyer Messages",
+    "empty": "No conversations yet."
   }
+
+
+
 }
+

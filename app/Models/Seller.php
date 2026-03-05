@@ -15,6 +15,7 @@ class Seller extends Authenticatable
         'email',
         'password',
         'location',
+        'slug',
         'number',
     ];
 
@@ -22,4 +23,9 @@ class Seller extends Authenticatable
         'password',
         'remember_token',
     ];
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
 }

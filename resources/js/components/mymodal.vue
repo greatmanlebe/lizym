@@ -24,7 +24,10 @@ const { add } = useCart()
             :src="product.image" 
             style="width: 100%; border-radius: 0.5rem;" 
           />
-
+          <img :src="`/img/${product.image}`"             
+                   alt="Product Image" 
+            style="width: 100%; border-radius: 0.5rem;"
+          />
           <div>
             <h2 style="font-size: 2rem; margin: 0.5rem 0;">
               {{ product.name }}

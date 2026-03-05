@@ -15,20 +15,20 @@ const csrf = page.props.csrf_token
 
       <!-- Header -->
       <section class="dashboard-header">
-        <h1 class="dashboard-title">Welcome, {{ seller.name }}</h1>
-        <p class="dashboard-subtitle">Seller ID: {{ seller.id }}</p>
+        <h1 class="dashboard-title">{{ $t('app.wel') }} {{ seller.name }}</h1>
+        <!--<p class="dashboard-subtitle">Seller ID: {{ seller.id }}</p> -->
 
         <a href="/seller/products/create" class="btn-primary add-product-btn">
-          + Add Product
+          {{ $t('app.+ Add Product') }}
         </a>
       </section>
 
       <!-- Product List -->
       <section class="products-section">
-        <h2 class="section-title">Your Products</h2>
+        <h2 class="section-title">{{ $t('app.Your Products') }}</h2>
 
         <div v-if="products.length === 0" class="empty-state">
-          <p>You have no products yet.</p>
+          <p>{{ $t('app.You have no products yet.') }}</p>
         </div>
 
         <div v-else class="products-grid">
@@ -42,10 +42,11 @@ const csrf = page.props.csrf_token
               alt="Product Image"
               class="product-image"
             />
-
+           <img :src="`/img/${product.image}`"               alt="Product Image"
+              class="product-image" />
             <div class="product-info">
               <h3 class="product-name">{{ product.name }}</h3>
-              <p class="product-price">${{ product.price }}</p>
+              <p class="product-price">FCFA {{ product.price }}</p>
               <p class="product-category">Category: {{ product.category }}</p>
             </div>
 
@@ -58,14 +59,15 @@ const csrf = page.props.csrf_token
               <input type="hidden" name="_method" value="DELETE" />
 
               <button class="btn-danger delete-btn">
-                Delete
+               {{ $t('app.delete') }}
               </button>
             </form>
           </div>
         </div>
       </section>
-      <a :href="`/shop/${seller.id}`" class="btn-primary">
-        View My Shop
+      <br>
+      <a :href="`/shop/${seller.slug}`" class="btn-primary">
+       {{ $t('app.View My Shop') }}
       </a>
 
     </main>

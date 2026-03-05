@@ -1,12 +1,12 @@
 <template>
   <section class="hero">
     <div class="container">
-      <h2>Welcome to Lizym</h2>
-      <p>Discover amazing products at unbeatable prices</p>
+      <h2>{{ $t('app.Welcome to Lizym') }}</h2>
+      <p>{{ $t('app.text') }}</p>
 
       <div class="hero-buttons">
-        <Link href="/seller/register" class="btn btn-primary">Sell</Link>
-        <button class="btn btn-outline">Learn More</button>
+        <Link href="/seller/register" class="btn btn-primary">{{ $t('app.Become a partner') }}</Link>
+        <button class="btn btn-outline">{{ $t('app.learn more') }}</button>
       </div>
     </div>
   </section>

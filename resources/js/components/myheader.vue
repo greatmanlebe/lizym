@@ -18,9 +18,11 @@ import { router } from '@inertiajs/vue3'
 
 const { locale } = useI18n()
 
-function switchLang(lang: 'en' | 'fr') {
-  locale.value = lang
-  router.get(`/lang/${lang}`, {}, {
+function toggleLang() {
+  const next = locale.value === 'en' ? 'fr' : 'en'
+  locale.value = next
+
+  router.get(`/lang/${next}`, {}, {
     preserveScroll: true,
     preserveState: true
   })
@@ -64,10 +66,11 @@ function switchLang(lang: 'en' | 'fr') {
               <path d="M7 8l-4 4 4 4"/>
             </svg>
           </Link>
-  <div class="lang-switcher">
-    <button @click="switchLang('en')" :class="{ active: locale === 'en' }">EN</button>
-    <button @click="switchLang('fr')" :class="{ active: locale === 'fr' }">FR</button>
-  </div>
+          <button class="lang-toggle" @click="toggleLang">
+            <span class="lang-pill">{{ locale === 'en' ? 'FR' : 'EN' }}</span>
+          </button>
+
+
 
           <!-- Mobile menu -->
           <button class="icon-btn mobile-menu-btn" @click="mobileMenu = !mobileMenu">
@@ -88,16 +91,26 @@ function switchLang(lang: 'en' | 'fr') {
 
         <!-- Buyer -->
         <div v-if="buyer" style="font-weight:600; margin-left:1rem;">
-          <p>{{ $t('app.welcome') }} {{ buyer.name }}</p>
+          <p>{{ $t('app.wel') }} {{ buyer.name }}</p>
                   <!--  <p>(ID: {{ buyer.id }})</p>-->
         </div>
 
         <!-- Seller -->
         <div v-if="seller" style="font-weight:600; margin-left:1rem;">
-          <p>{{ $t('app.welcome') }} {{ seller.name }}</p>
+          <Link href="/seller/dashboard">Dashboard</Link>
+          <p>{{ $t('app.wel') }} {{ seller.name }}</p>
                   <!--  <p>(ID: {{ seller.id }})</p>-->
         </div>
       </div>
     </div>
   </header>
 </template>
+<style>
+.lang-pill {
+  background: #f3f3f3;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 12px;
+}
+</style>

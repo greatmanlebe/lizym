@@ -9,12 +9,10 @@ const props = defineProps({
 <template>
   <AppLayout>
   <div class="inbox-container">
+    <h2 class="inbox-title">{{ $t('inbox.title') }}</h2>
 
-    <h2 class="inbox-title">Buyer Messages</h2>
-
-    <!-- No conversations -->
     <div v-if="!conversations || conversations.length === 0" class="inbox-empty">
-      No conversations yet.
+      {{ $t('inbox.empty') }}
     </div>
 
     <!-- Conversation list -->
