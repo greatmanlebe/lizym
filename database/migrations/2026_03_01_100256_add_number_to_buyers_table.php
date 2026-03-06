@@ -11,10 +11,9 @@ return new class extends Migration
      */
 public function up()
 {
-if (!Schema::hasColumn('buyers', 'number')) {
-    $table->integer('number')->nullable();
-}
-
+    Schema::table('buyers', function (Blueprint $table) {
+        $table->integer('number')->nullable();
+    });
 }
 
 public function down()
