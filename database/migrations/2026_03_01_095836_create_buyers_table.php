@@ -17,7 +17,6 @@ public function up()
         $table->string('email')->unique();
         $table->string('password');
         $table->string('location');
-        $table->integer('number')->nullable();
         $table->timestamps();
     });
 }
