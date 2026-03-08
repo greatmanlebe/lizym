@@ -50,11 +50,11 @@ function startChat() {
 
     <div class="cart-items">
       <div v-for="item in cart" :key="item.product.id" class="cart-item">
-        <img :src="item.product.image" />
-
+           <img :src="`/img/${item.product.image}`"               alt="Product Image"
+              class="product-image" />
         <div class="cart-item-info">
           <h4>{{ item.product.name }}</h4>
-          <div class="cart-item-price">${{ item.product.price }}</div>
+          <div class="cart-item-price">FCFA {{ item.product.price }}</div>
 
           <div class="cart-item-actions">
             <button class="quantity-btn" @click="update(item.product.id, -1)">-</button>

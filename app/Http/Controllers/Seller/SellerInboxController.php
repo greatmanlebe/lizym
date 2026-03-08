@@ -10,7 +10,7 @@ class SellerInboxController extends Controller
     public function index()
     {
         $seller = auth('seller')->user();
-
+            $buyer = auth('web')->user();
         $conversations = Conversation::with(['buyer', 'messages' => function ($q) {
             $q->latest()->limit(1);
         }])
@@ -24,7 +24,8 @@ class SellerInboxController extends Controller
 
 
         return inertia('seller/Inbox', [
-            'conversations' => $conversations
+            'conversations' => $conversations,
+                             'buyer' => $buyer,
         ]);
     }
 }
