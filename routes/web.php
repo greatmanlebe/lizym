@@ -98,6 +98,7 @@ Route::middleware([\App\Http\Middleware\SetLocale::class])->group(function () {
 
             return inertia('chat/Chats', [
                 'conversations' => $conversations,
+                 'buyer' => $buyer,
             ]);
         })->name('chat.chats');
     });

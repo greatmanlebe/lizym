@@ -12,7 +12,7 @@ class Product extends Model
     protected $fillable = [
         'seller_id',
         'name',
-        'price',
+        'price' => 'decimal:2', // or 'float'
         'image',
         'category',
         'description',

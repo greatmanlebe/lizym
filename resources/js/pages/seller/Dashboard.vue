@@ -28,7 +28,7 @@ const csrf = page.props.csrf_token
         <h2 class="section-title">{{ $t('app.Your Products') }}</h2>
 
         <div v-if="products.length === 0" class="empty-state">
-          <p>{{ $t('app.You have no products yet.') }}</p>
+          <p>{{ $t('app.You have no products yet') }}</p>
         </div>
 
         <div v-else class="products-grid">
@@ -37,11 +37,6 @@ const csrf = page.props.csrf_token
             :key="product.id"
             class="product-card"
           >
-            <img
-              :src="product.image"
-              alt="Product Image"
-              class="product-image"
-            />
            <img :src="`/img/${product.image}`"               alt="Product Image"
               class="product-image" />
             <div class="product-info">

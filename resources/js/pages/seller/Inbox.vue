@@ -1,8 +1,10 @@
 <script setup>
 import { Link } from '@inertiajs/vue3'
-  import AppLayout from '@/layouts/main.vue'
+import AppLayout from '@/layouts/main.vue'
+
 const props = defineProps({
-  conversations: Array
+  conversations: Array,
+  buyer: Object // Add buyer prop
 })
 </script>
 
