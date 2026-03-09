@@ -77,8 +77,9 @@ Route::middleware([\App\Http\Middleware\SetLocale::class])->group(function () {
         });
 
         // Buyer starts chat from checkout
-        Route::post('/checkout/start-chat', [ChatController::class, 'startChat'])
-            ->name('checkout.start-chat');
+// ✅ SAFE for InfinityFree hosting
+Route::post('/checkout/message', [ChatController::class, 'startChat'])
+    ->name('checkout.start-chat');  // Keep the NAME the same!
 
         // Buyer chat list
         Route::get('/chat/chats', function () {
