@@ -18,6 +18,8 @@ public function up()
         $table->string('password');
         $table->string('location')->nullable();
         $table->string('number')->nullable();
+        $table->string('slug')->unique();
+        $table->string('certification_status')->unique();
         $table->timestamps();
     });
 }
