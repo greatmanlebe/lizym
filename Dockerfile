@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# Install system dependencies + NODE
+# Install system dependencies + Node
 RUN apt-get update && apt-get install -y \
     git curl libpng-dev libonig-dev libxml2-dev zip unzip \
     nodejs npm \
@@ -10,11 +10,11 @@ RUN apt-get update && apt-get install -y \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy project
+# Copy project files
 COPY . /var/www/html
 WORKDIR /var/www/html
 
-# Build step-by-step (debug each command)
+# Build step by step
 RUN composer install --no-dev --optimize-autoloader
 RUN npm install
 RUN npm run build
@@ -26,6 +26,7 @@ RUN chmod -R 755 storage bootstrap/cache
 RUN a2enmod rewrite
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
+# Expose port (Render requires 10000)
 EXPOSE 10000
+
 CMD ["apache2-foreground"]
-10000
