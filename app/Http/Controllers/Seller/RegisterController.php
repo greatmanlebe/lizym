@@ -24,6 +24,8 @@ class RegisterController extends Controller
             'slug' => 'required|unique:sellers', // Add the table name
             'email' => 'required|email|unique:sellers,email',
             'password' => 'required|min:6'
+
+
         ]);
 
         $seller = Seller::create([
@@ -33,6 +35,7 @@ class RegisterController extends Controller
             'number' => $request->number,
             'slug' => $request->slug,
             'password' => Hash::make($request->password),
+            'certification_status' => 'pending',
         ]);
 
         Auth::guard('seller')->login($seller);
