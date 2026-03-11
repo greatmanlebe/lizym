@@ -25,7 +25,9 @@ RUN php artisan key:generate --force
 RUN npm install
 
 # Build assets
-RUN npm run build
+RUN npm run build --debug --verbose --stacktrace
+RUN ls -R public
+
 
 # Verify manifest
 RUN test -f public/build/manifest.json || (echo "❌ NO MANIFEST" && exit 1)
