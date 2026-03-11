@@ -1,35 +1,32 @@
 FROM php:8.2-apache
 
+# System deps
 RUN apt-get update && apt-get install -y \
     git curl libpng-dev libonig-dev libxml2-dev zip unzip \
-    && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
-    && npm install -g npm@latest \
-    && docker-php-ext-install mbstring exif pcntl bcmath gd \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && docker-php-ext-install mbstring exif pcntl bcmath gd
 
+# Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
-COPY package*.json ./
-RUN npm ci --legacy-peer-deps
 
+# Copy full project BEFORE npm install
 COPY . .
 
-# CRITICAL: Laravel FIRST (Wayfinder needs this!)
-RUN composer install --no-dev --optimize-autoloader
-RUN php artisan key:generate --force --no-interaction
-RUN touch .env
-RUN echo "APP_ENV=production" >> .env
-RUN echo "APP_KEY=$(php artisan key:generate --show | cut -d' ' -f3)" >> .env
-
-# NOW Vite/Wayfinder works!
+# Install JS deps
+RUN npm install
 RUN npm run build
 
 # Verify manifest
-RUN test -f public/build/manifest.json && echo "✅ MANIFEST OK"
+RUN test -f public/build/manifest.json || (echo "❌ NO MANIFEST" && exit 1)
 
-# Storage + SQLite
+# Laravel
+RUN composer install --no-dev --optimize-autoloader
+RUN php artisan key:generate --force
+
+# SQLite + permissions
 RUN mkdir -p database storage/{logs,framework/{cache,sessions,views}}
 RUN touch database/database.sqlite
 RUN chown -R www-data:www-data storage database bootstrap/cache
