@@ -32,6 +32,13 @@ RUN echo "</Directory>" >> /etc/apache2/sites-available/000-default.conf
 
 # Symlink public to Apache root
 RUN rm -rf /var/www/html && ln -s /var/www/public /var/www/html
+# Create SQLite database
+RUN mkdir -p /var/www/database
+RUN touch /var/www/database/database.sqlite
+RUN chown www-data:www-data /var/www/database/database.sqlite
+RUN chmod 664 /var/www/database/database.sqlite
 
+# Run migrations
+RUN php artisan migrate --force --no-interaction || true
 EXPOSE 10000
 CMD ["apache2-foreground"]
