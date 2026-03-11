@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# System deps
+# System deps + Node 20
 RUN apt-get update && apt-get install -y \
     git curl libpng-dev libonig-dev libxml2-dev zip unzip \
     && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
@@ -17,7 +17,9 @@ COPY . .
 
 # Install JS deps
 RUN npm install
-RUN npm run build
+
+# Build assets
+RUN npm run build --verbose || (echo "❌ VITE FAILED" && exit 1)
 
 # Verify manifest
 RUN test -f public/build/manifest.json || (echo "❌ NO MANIFEST" && exit 1)
