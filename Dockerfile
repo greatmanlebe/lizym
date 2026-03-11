@@ -33,6 +33,9 @@ RUN ls -R public
 RUN test -f public/build/.vite/manifest.json || (echo "❌ NO MANIFEST" && exit 1)
 
 # SQLite + permissions
+# Run migrations (creates sessions table)
+RUN php artisan migrate --force
+
 RUN mkdir -p database storage/{logs,framework/{cache,sessions,views}}
 RUN touch database/database.sqlite
 RUN chown -R www-data:www-data storage database bootstrap/cache
