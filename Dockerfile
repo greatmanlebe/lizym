@@ -18,14 +18,14 @@ COPY . .
 # Install PHP deps BEFORE Vite build (Wayfinder needs Artisan)
 RUN composer install --no-dev --optimize-autoloader
 
-# Generate app key (needed for some commands)
+# Generate app key
 RUN php artisan key:generate --force
 
 # Install JS deps
 RUN npm install
 
 # Build assets (Wayfinder now works)
-RUN npm run build --verbose || (echo "❌ VITE FAILED" && exit 1)
+RUN npm run build --verbose
 
 # Verify manifest
 RUN test -f public/build/manifest.json || (echo "❌ NO MANIFEST" && exit 1)
