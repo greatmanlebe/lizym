@@ -12,21 +12,23 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
-# Copy full project BEFORE npm install
+# Copy full project
 COPY . .
+
+# Install PHP deps BEFORE Vite build (Wayfinder needs Artisan)
+RUN composer install --no-dev --optimize-autoloader
+
+# Generate app key (needed for some commands)
+RUN php artisan key:generate --force
 
 # Install JS deps
 RUN npm install
 
-# Build assets
+# Build assets (Wayfinder now works)
 RUN npm run build --verbose || (echo "❌ VITE FAILED" && exit 1)
 
 # Verify manifest
 RUN test -f public/build/manifest.json || (echo "❌ NO MANIFEST" && exit 1)
-
-# Laravel
-RUN composer install --no-dev --optimize-autoloader
-RUN php artisan key:generate --force
 
 # SQLite + permissions
 RUN mkdir -p database storage/{logs,framework/{cache,sessions,views}}
