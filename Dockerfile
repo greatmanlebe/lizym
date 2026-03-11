@@ -12,10 +12,10 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
-# Copy full project
+# Copy full project FIRST
 COPY . .
 
-# Install PHP deps BEFORE Vite build (Wayfinder needs Artisan)
+# Install PHP deps BEFORE Vite build
 RUN composer install --no-dev --optimize-autoloader
 
 # Generate app key
@@ -24,8 +24,8 @@ RUN php artisan key:generate --force
 # Install JS deps
 RUN npm install
 
-# Build assets (Wayfinder now works)
-RUN npm run build --verbose
+# Build assets
+RUN npm run build
 
 # Verify manifest
 RUN test -f public/build/manifest.json || (echo "❌ NO MANIFEST" && exit 1)
