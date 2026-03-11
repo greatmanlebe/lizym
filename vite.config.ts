@@ -24,4 +24,17 @@ export default defineConfig({
             formVariants: true,
         }),
     ],
+     server: {
+        https: true,
+        host: '0.0.0.0'
+    },
+    build: {
+        // Force HTTPS in production
+        manifest: true,
+        outDir: 'public/build',
+        assetsDir: 'assets'
+    },
+    define: {
+        'import.meta.env.VITE_APP_URL': JSON.stringify('https://lizym.onrender.com')
+    }
 });
