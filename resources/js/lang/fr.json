@@ -71,8 +71,45 @@
     "inbox": {
     "title": "Messages des acheteurs",
     "empty": "Aucune conversation pour le moment."
+  },
+  "admin": {
+    "login": {
+      "title": "Connexion Administrateur",
+      "email": "Adresse e-mail",
+      "email_placeholder": "exemple.com",
+      "password": "Mot de passe",
+      "password_placeholder": "••••••••",
+      "button": "Se connecter",
+      "processing": "Traitement..."
+    }
+
+
+  } ,
+   "dashboard": {
+    "title": "Tableau de bord administrateur",
+    "total_sellers": "Vendeurs totaux",
+    "pending_certifications": "Certifications en attente",
+    "verified_sellers": "Vendeurs vérifiés",
+    "gold_sellers": "Vendeurs Gold",
+    "platinum_sellers": "Vendeurs Platinum",
+    "rejected_sellers": "Vendeurs rejetés",
+    "seller_growth": "Croissance des vendeurs",
+    "certification_distribution": "Répartition des certifications",
+    "pending": "En attente",
+    "verified": "Vérifié",
+    "gold": "Gold",
+    "platinum": "Platinum",
+    "rejected": "Rejeté"
   }
-
-
+  ,
+  "sellers": {
+  "title": "Liste des vendeurs",
+  "email": "Email",
+  "products": "Produits",
+  "certification": "Certification",
+  "view_profile": "Voir le profil"
 }
+}
+
+
 

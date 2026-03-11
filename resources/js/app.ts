@@ -5,7 +5,8 @@ import { createApp, h } from 'vue'
 import '../css/my.css'
 import { initializeTheme } from './composables/useAppearance'
 
-import setupI18n from '../js/i18n'
+// FIXED PATH
+import setupI18n from './i18n'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
 
@@ -14,14 +15,16 @@ createInertiaApp({
 
     resolve: (name) =>
         resolvePageComponent(
-            `./Pages/${name}.vue`,
-            import.meta.glob<DefineComponent>('./Pages/**/*.vue')
+            `./pages/${name}.vue`,
+            import.meta.glob<DefineComponent>('./pages/**/*.vue')
         ),
 
     setup({ el, App, props, plugin }) {
 
-        // ✔ THIS IS THE CORRECT PATH FOR YOUR STARTER KIT
+        // locale from backend or default
         const initialLocale = props.initialPage.props.locale || 'en'
+
+        // create i18n instance
         const i18n = setupI18n(initialLocale)
 
         createApp({ render: () => h(App, props) })

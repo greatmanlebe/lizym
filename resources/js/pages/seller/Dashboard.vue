@@ -17,9 +17,13 @@ const csrf = page.props.csrf_token
       <section class="dashboard-header">
         <h1 class="dashboard-title">{{ $t('app.wel') }} {{ seller.name }}</h1>
         <!--<p class="dashboard-subtitle">Seller ID: {{ seller.id }}</p> -->
-
+        <h2 class="dashboard-text">{{ $t('app.statue') }} ; {{ seller.certification_status }}</h2>
         <a href="/seller/products/create" class="btn-primary add-product-btn">
           {{ $t('app.+ Add Product') }}
+        </a>
+        <br>
+        <a href="/seller/documents" class="btn-primary add-product-btn">
+          {{ $t('app.+ verify') }}
         </a>
       </section>
 

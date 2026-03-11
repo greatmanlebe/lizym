@@ -17,6 +17,8 @@ class Seller extends Authenticatable
         'location',
         'slug',
         'number',
+                'certification_status',
+
     ];
 
     protected $hidden = [
@@ -27,5 +29,14 @@ class Seller extends Authenticatable
     {
         return 'slug';
     }
+public function documents()
+{
+    return $this->hasMany(\App\Models\SellerDocument::class, 'seller_id', 'id');
+}
+
+public function products()
+{
+    return $this->hasMany(\App\Models\Product::class, 'seller_id', 'id');
+}
 
 }

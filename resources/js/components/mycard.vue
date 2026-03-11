@@ -60,7 +60,7 @@ function startChat() {
             <button class="quantity-btn" @click="update(item.product.id, -1)">-</button>
             <span>{{ item.quantity }}</span>
             <button class="quantity-btn" @click="update(item.product.id, 1)">+</button>
-            <button class="quantity-btn" @click="remove(item.product.id)">×</button>
+            <button class="quantity-btn" @click="remove(item.product.id)">X</button>
           </div>
         </div>
       </div>
@@ -70,7 +70,7 @@ function startChat() {
       <div class="cart-total">
         <span>Total:</span>
         <span>
-          ${{ cart.reduce((s, i) => s + i.product.price * i.quantity, 0).toFixed(2) }}
+          FCFA {{ cart.reduce((s, i) => s + i.product.price * i.quantity, 0).toFixed(2) }}
         </span>
       </div>
 
