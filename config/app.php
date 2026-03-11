@@ -12,7 +12,8 @@ return [
     | other UI elements where an application name needs to be displayed.
     |
     */
-
+'url' => env('APP_URL', 'https://lizym.onrender.com'),
+'asset_url' => env('ASSET_URL'),
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
@@ -52,7 +53,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+
 
     /*
     |--------------------------------------------------------------------------
