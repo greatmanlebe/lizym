@@ -30,7 +30,7 @@ RUN ls -R public
 
 
 # Verify manifest
-RUN test -f public/build/manifest.json || (echo "❌ NO MANIFEST" && exit 1)
+RUN test -f public/build/.vite/manifest.json || (echo "❌ NO MANIFEST" && exit 1)
 
 # SQLite + permissions
 RUN mkdir -p database storage/{logs,framework/{cache,sessions,views}}
