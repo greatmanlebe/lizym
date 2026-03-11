@@ -1,18 +1,26 @@
 <?php
-
+        use App\Http\Controllers\Admin\AdminAuthController;
+        use App\Http\Controllers\Admin\AdminDashboardController;
+        use App\Http\Controllers\Admin\AdminSellerController;
+        use App\Http\Controllers\Admin\AdminDocumentController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\Conversation;
 use App\Models\Product;
 use App\Models\Seller;
-
+use App\Models\SellerDocument;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+
+ 
+use App\Http\Controllers\Seller\SellerDocumentController;
 
 use App\Http\Controllers\Seller\RegisterController as SellerRegister;
 use App\Http\Controllers\Seller\LoginController as SellerLogin;
 use App\Http\Controllers\Seller\SellerInboxController;
+
+
 
 use App\Http\Controllers\ChatController;
 
@@ -77,8 +85,9 @@ Route::middleware([\App\Http\Middleware\SetLocale::class])->group(function () {
         });
 
         // Buyer starts chat from checkout
-        Route::post('/checkout/start-chat', [ChatController::class, 'startChat'])
+       Route::post('/checkout/start-chat', [ChatController::class, 'startChat'])
             ->name('checkout.start-chat');
+
 
         // Buyer chat list
         Route::get('/chat/chats', function () {
@@ -178,6 +187,10 @@ Route::middleware([\App\Http\Middleware\SetLocale::class])->group(function () {
                 ->name('seller.inbox');
         });
     });
+Route::middleware('auth:seller')->group(function () {
+    Route::get('/seller/documents', [SellerDocumentController::class, 'index']);
+    Route::post('/seller/documents', [SellerDocumentController::class, 'store']);
+});
 
 
     /*
@@ -223,5 +236,30 @@ Route::middleware([\App\Http\Middleware\SetLocale::class])->group(function () {
 
         return redirect()->route('login');
     })->name('my-chats');
+    
+
+
+    //Admin setup
+
+        Route::prefix('admin')->group(function () {
+
+            Route::get('/login', [AdminAuthController::class, 'showLogin']);
+            Route::post('/login', [AdminAuthController::class, 'login']);
+
+            Route::middleware('admin')->group(function () {
+                Route::get('/dashboard', [AdminDashboardController::class, 'index']);
+
+                Route::get('/sellers', [AdminSellerController::class, 'index']);
+                Route::get('/sellers/{seller}', [AdminSellerController::class, 'show']);
+
+                Route::post('/sellers/{seller}/approve', [AdminSellerController::class, 'approve']);
+                Route::post('/sellers/{seller}/reject', [AdminSellerController::class, 'reject']);
+                Route::post('/sellers/{seller}/set-level', [AdminSellerController::class, 'setLevel']);
+
+                Route::post('/documents/{document}/approve', [AdminDocumentController::class, 'approve']);
+                Route::post('/documents/{document}/reject', [AdminDocumentController::class, 'reject']);
+            });
+        });
 
 });
+

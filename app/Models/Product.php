@@ -17,4 +17,9 @@ class Product extends Model
         'category',
         'description',
     ];
+    public function seller()
+{
+    return $this->belongsTo(\App\Models\Seller::class, 'seller_id', 'id');
+}
+
 }

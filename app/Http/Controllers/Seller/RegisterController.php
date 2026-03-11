@@ -16,6 +16,16 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+
+    $request->validate([
+            'name' => 'required',
+            'location' => 'required',
+            'number' => 'required',
+            'slug' => 'required|unique:sellers', // Add the table name
+            'email' => 'required|email|unique:sellers,email',
+            'password' => 'required|min:6'
+        ]);
+
         $seller = Seller::create([
             'name' => $request->name,
             'email' => $request->email,

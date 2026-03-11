@@ -2,6 +2,7 @@
 
 use App\Models\Buyer;
 use App\Models\Seller;
+use App\Models\Admin;
 
 return [
 
@@ -32,6 +33,11 @@ return [
             'driver' => 'session',
             'provider' => 'sellers',
         ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -49,6 +55,11 @@ return [
         'sellers' => [
             'driver' => 'eloquent',
             'model' => Seller::class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => Admin::class,
         ],
     ],
 

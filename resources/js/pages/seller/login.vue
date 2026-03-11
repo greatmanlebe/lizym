@@ -1,6 +1,10 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3'
 import AppLayout from '@/layouts/main.vue'
+
+import { ref } from 'vue'
+const showPassword = ref(false)
+
 const form = useForm({
   email: '',
   password: '',
@@ -33,10 +37,12 @@ function submit() {
           <label style="font-weight: 600;">{{ $t('app.password') }}</label>
           <input
             v-model="form.password"
-            type="password"
+             :type="showPassword ? 'text' : 'password'"
+              @click="showPassword = !showPassword"
             required
             class="input"
             style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 0.5rem;"
+
           />
         </div>
     <p v-if="form.errors.email" style="color:red; margin-top:10px;">

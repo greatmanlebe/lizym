@@ -72,7 +72,43 @@
     "inbox": {
     "title": "Buyer Messages",
     "empty": "No conversations yet."
-  }
+  },
+  "admin": {
+    "login": {
+      "title": "Admin Login",
+      "email": "Email",
+      "email_placeholder": "example.com",
+      "password": "Password",
+      "password_placeholder": "••••••••",
+      "button": "Login",
+      "processing": "Processing..."
+    }
+
+
+  },
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "total_sellers": "Total Sellers",
+      "pending_certifications": "Pending Certifications",
+      "verified_sellers": "Verified Sellers",
+      "gold_sellers": "Gold Sellers",
+      "platinum_sellers": "Platinum Sellers",
+      "rejected_sellers": "Rejected Sellers",
+      "seller_growth": "Seller Growth",
+      "certification_distribution": "Certification Distribution",
+      "pending": "Pending",
+      "verified": "Verified",
+      "gold": "Gold",
+      "platinum": "Platinum",
+      "rejected": "Rejected"
+    },
+"sellers": {
+  "title": "Sellers List",
+  "email": "Email",
+  "products": "Products",
+  "certification": "Certification",
+  "view_profile": "View Profile"
+}
 
 
 

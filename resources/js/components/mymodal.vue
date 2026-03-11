@@ -15,7 +15,7 @@ const { add } = useCart()
 <template>
   <div class="modal" :class="{ active: open }">
     <div class="modal-content">
-      <button class="close-modal" @click="$emit('close')">×</button>
+      <button class="close-modal" @click="$emit('close')">X</button>
 
       <div class="modal-body" v-if="product">
         <div style="display: grid; gap: 1.5rem;">
@@ -41,7 +41,7 @@ const { add } = useCart()
               ${{ product.price }}
             </div>
 
-            <button class="btn btn-primary" @click="add(product)">
+            <button class="btn btn-primary" @click="$emit('close'), add(product)">
               Add to Cart
             </button>
           </div>
