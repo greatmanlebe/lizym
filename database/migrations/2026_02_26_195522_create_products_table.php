@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('category');
             $table->text('description');
-            $table->string('seller-id');
+            $table->string('seller_id');
             $table->timestamps();
         });
     }

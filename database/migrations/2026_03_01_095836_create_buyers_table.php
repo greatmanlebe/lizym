@@ -18,7 +18,6 @@ public function up()
         $table->string('password');
         $table->string('location');
         $table->string('number');
-        $table->string('slug');
         $table->timestamps();
     });
 }
