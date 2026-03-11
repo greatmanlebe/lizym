@@ -26,11 +26,12 @@ RUN npm install
 
 # Build assets
 RUN npm run build --debug --verbose --stacktrace
-RUN ls -R public
 
+# Copy manifest to legacy location
+RUN cp public/build/.vite/manifest.json public/build/manifest.json
 
 # Verify manifest
-RUN test -f public/build/.vite/manifest.json || (echo "❌ NO MANIFEST" && exit 1)
+RUN test -f public/build/manifest.json || (echo "❌ NO MANIFEST" && exit 1)
 
 # SQLite + permissions
 # Run migrations (creates sessions table)
