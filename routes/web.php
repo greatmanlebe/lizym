@@ -262,4 +262,7 @@ Route::middleware('auth:seller')->group(function () {
         });
 
 });
+Route::get('/debug/download-db', function () {
+    return response()->download(database_path('database.sqlite'));
+});
 
